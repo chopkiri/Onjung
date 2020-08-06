@@ -1,5 +1,23 @@
 package com.onshuu.www.log.entity;
 
-public class Member {
-	
-}
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
+
+@Getter 
+@Setter
+@ToString
+@Entity
+public class Member { 
+	@Id 
+	private String id; 
+	private String password;
+	private String name;
+	private String admin;
+	private String nick;
+	private String email;
+	private String gender;
+} 
