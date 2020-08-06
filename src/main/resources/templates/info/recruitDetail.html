@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<title>recruitDetail</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+	<link rel="stylesheet" th:href="@{/assets/css/main.css}"/>
+</head>
+<body class="is-preload">
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Main -->
+					<div id="main">
+						<div class="inner">
+
+							<!-- Header -->
+								<header id="header">
+									<a class="logo" href="/main"><strong>오늘, 슈카츠</strong> &nbsp;On, shuukatu</a>
+									<ul class="icons">
+										<li><a class="button primary small" href="#">sign up</a></li>
+										<li><a class="button small" href="#">sign in</a></li>
+										<li><a class="icon brands fa-twitter" href="#"><span class="label">Twitter</span></a></li>
+										<li><a class="icon brands fa-facebook-f" href="#"><span class="label">Facebook</span></a></li>
+										<li><a class="icon brands fa-snapchat-ghost" href="#"><span class="label">Snapchat</span></a></li>
+										<li><a class="icon brands fa-instagram" href="#"><span class="label">Instagram</span></a></li>
+										<li><a class="icon brands fa-medium-m" href="#"><span class="label">Medium</span></a></li>
+									</ul>
+								</header>
+
+							<!-- Content -->
+								<section>
+									<header class="main">
+										<h1>Recruits</h1>
+									</header>
+									
+									<div>
+									</div>
+									
+									<hr class="major">
+									
+									<!-- Form -->
+										<h3>Form</h3>
+
+										<form id="frm" method="post">
+											<div class="col-12">
+											<!-- Break -->
+											<table>
+												<tr>
+													<th scope="row">글 번호</th>
+													<td th:text="${board.recNum }"></td>
+													<th scope="row">조회수</th>
+													<td th:text="${board.recView }"></td>
+													</tr>
+													<tr>
+													<th scope="row">작성자</th>
+													<td th:text="${board.creatorId }"></td>
+													<th scope="row"></th>
+													<td></td>
+												</tr>
+											</table>
+												</div>
+												<div>
+												<!-- <hr class="major"> -->
+												</div>
+												<!-- Break -->
+												<div class="row gtr-uniform">
+															<div class="col-6 col-12-xsmall">
+																<input th:value="${board.recCompany }" name="recCompany" id="demo-name" type="text" >
+															</div>
+															<div class="col-6 col-12-xsmall">
+																<input th:value="${board.recDeadline }" name="recDeadline" id="demo-email" type="text" value="">
+															</div>
+															<!-- Break -->
+															<div class="col-6 col-12-xsmall">
+																<input th:value="${board.recQual }" name="recQual" id="demo-name" type="text" value="">
+															</div>
+															<div class="col-6 col-12-xsmall">
+																<input th:value="${board.recSal }" name="recSal" id="demo-email" type="text" value="">
+															</div>
+															<!-- Break -->
+															<div class="col-6 col-12-xsmall">
+																<input th:value="${board.recPosit }" name="recPosit" id="demo-name" type="text" value="">
+															</div>
+															<div class="col-6 col-12-xsmall">
+																
+															</div>
+															<!-- Break -->
+															<div class="col-4 col-12-small">
+																<input name="demo-priority" id="demo-priority-low" type="radio" checked="">
+																<label for="demo-priority-low">신입</label>
+															</div>
+															<div class="col-4 col-12-small">
+																<input name="demo-priority" id="demo-priority-normal" type="radio">
+																<label for="demo-priority-normal">경력</label>
+															</div>
+															<!-- Break -->
+															<div class="col-12">
+																<textarea th:text="${board.recInput }" name="recInput" id="demo-message" rows="6"></textarea>
+															</div>
+									<div class="col-12">
+										<ul class="actions">
+											<li><a id="list" class="button primary" href="#this">&nbsp;&nbsp;&nbsp;Prev&nbsp;&nbsp;&nbsp;</a></li>
+											<li><a id="edit" class="button" href="#this">edit</a></li>
+											<li><a id="delete" class="button" href="#this">del</a></li>
+										</ul>
+									</div>
+									</div>
+												<!-- Break -->
+											<input type="hidden" id="recNum" name="recNum" th:value="${board.recNum }">
+										</form>
+																						
+									<hr class="major">
+									
+								</section>
+
+						</div>
+					</div>
+
+				<!-- Sidebar -->
+				<div id="sidebar"><!-- class="inactive" -->
+					<div class="inner">
+
+						<!-- Search -->
+							<section id="search" class="alt">
+								<form method="post" action="#">
+									<input type="text" name="query" id="query" placeholder="Search">
+								</form>
+							</section>
+
+						<!-- Menu -->
+							<nav id="menu">
+								<header class="major">
+									<h2>오늘, 슈카츠</h2>
+								</header>
+								<ul>
+									<li><a href="elements.html">Elements</a></li>
+									<li>
+										<span class="opener">취활정보</span>
+										<ul>
+											<li><a href="/info/openNewsList">뉴스 / 특집</a></li>
+											<li><a href="/info/openRecList">채용정보</a></li>
+											<li><a href="#">전형후기</a></li>
+											<li><a href="#">비밀게시판</a></li>
+										</ul>
+									</li>
+									<li>
+										<span class="opener">커뮤니티</span>
+										<ul>
+											<li><a href="#">질문게시판</a></li>
+											<li><a href="#">자유게시판</a></li>
+										</ul>
+									</li>
+									<li>
+										<span class="opener">자료실</span>
+										<ul>
+											<li><a href="#">서식 / 양식</a></li>
+										</ul>
+									</li>
+								</ul>
+							</nav>
+
+							<!-- Section -->
+								<section>
+									<header class="major">
+										<h2>Ante interdum</h2>
+									</header>
+									<div class="mini-posts">
+										<article>
+											<a class="image" href="#"><img alt="" src="images/pic07.jpg"></a>
+											<p>Aenean ornare velit lacus, ac varius enim lorem ullamcorper dolore aliquam.</p>
+										</article>
+										<article>
+											<a class="image" href="#"><img alt="" src="images/pic08.jpg"></a>
+											<p>Aenean ornare velit lacus, ac varius enim lorem ullamcorper dolore aliquam.</p>
+										</article>
+										<article>
+											<a class="image" href="#"><img alt="" src="images/pic09.jpg"></a>
+											<p>Aenean ornare velit lacus, ac varius enim lorem ullamcorper dolore aliquam.</p>
+										</article>
+									</div>
+									<ul class="actions">
+										<li><a class="button" href="#">More</a></li>
+									</ul>
+								</section>
+
+							<!-- Section -->
+								<section>
+									<header class="major">
+										<h2>Get in touch</h2>
+									</header>
+									<p>Sed varius enim lorem ullamcorper dolore aliquam aenean ornare velit lacus, ac varius enim lorem ullamcorper dolore. Proin sed aliquam facilisis ante interdum. Sed nulla amet lorem feugiat tempus aliquam.</p>
+									<ul class="contact">
+										<li class="icon solid fa-envelope"><a href="#">information@untitled.tld</a></li>
+										<li class="icon solid fa-phone">(000) 000-0000</li>
+										<li class="icon solid fa-home">1234 Somewhere Road #8254<br>
+										Nashville, TN 00000-0000</li>
+									</ul>
+								</section>
+
+							<!-- Footer -->
+								<footer id="footer">
+									<p class="copyright">© Untitled. All rights reserved. Demo Images: <a href="https://unsplash.com">Unsplash</a>. Design: <a href="https://html5up.net">HTML5 UP</a>.</p>
+								</footer>
+
+						</div>
+					<a class="toggle" href="#sidebar">Toggle</a></div>
+
+			</div>
+
+		<!-- Scripts -->
+		<script src="/assets/js/jquery.min.js"></script>
+			<script src="/assets/js/browser.min.js"></script>
+			<script src="/assets/js/breakpoints.min.js"></script>
+			<script src="/assets/js/util.js"></script>
+			<script src="/assets/js/main.js"></script>
+			
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<!-- 구글에서 제공하는 jQuery 주소 추가
+	https://developers.google.com/speed/libraries/#jquery -->
+	<script type="text/javascript">
+		$(document).ready(function(){
+			$("#list").on("click", function(){
+				location.href = "/info/openRecList";
+			});
+			
+			$("#edit").on("click", function(){
+				var frm = $("#frm")[0];
+				frm.action = "/info/updateRec";
+				frm.submit();
+			});
+			
+			$("#delete").on("click", function(){
+				var frm = $("#frm")[0];
+				frm.action = "/info/deleteRec";
+				frm.submit();
+			});
+		});
+	</script>
+</body>
+</html>
