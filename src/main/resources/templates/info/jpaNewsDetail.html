@@ -82,8 +82,8 @@
 															<div class="col-12">
 																<ul class="actions">
 																	<li><a id="list" class="button primary" href="#this">&nbsp;&nbsp;&nbsp;Prev&nbsp;&nbsp;&nbsp;</a></li>
-																	<li><a id="edit" class="button" href="#this">edit</a></li>
-																	<li><a id="delete" class="button" href="#this">del</a></li>
+																	<li><a th:if="${session['member'].admin == 'Y'}" id="edit" class="button" href="#this">edit</a></li>
+																	<li><a th:if="${session['member'].admin == 'Y'}" id="delete" class="button" href="#this">del</a></li>
 																</ul>
 															</div>
 														</div>
