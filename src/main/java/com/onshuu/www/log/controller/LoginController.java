@@ -25,10 +25,10 @@ public class LoginController {
 	public String openLoginWrite() throws Exception{
 		return "/log/login";
 	}
-	//@GetMapping("/signUp")
-	//public String opensignUp() throws Exception{
-		//return "/log/signUp";
-	//}
+	@GetMapping("/signup")
+	public String opensignUp() throws Exception{
+		return "/log/signUp";
+	}
 	
 	@PostMapping("/login")
 	public String login(ShuMem member, Model model) {

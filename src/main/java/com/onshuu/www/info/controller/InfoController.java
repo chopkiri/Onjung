@@ -157,7 +157,4 @@ public class InfoController {
 		infoService.deleteRec(recNum);
 		return "redirect:/info/openRecList";
 	}
-	
-	
-
 }
