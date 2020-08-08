@@ -1,5 +1,8 @@
 package com.onshuu.www.board.dto;
 
+import lombok.Data;
+
+@Data
 public class BoardFileDto {
 
     private int idx;
