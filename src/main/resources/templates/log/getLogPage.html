@@ -22,7 +22,19 @@
 					<div class="inner">
 
 						<!-- Header -->
-							<div th:replace="/header::header"></div>
+							<header id="header">
+								<a class="logo" href="/main"><strong>오늘, 슈카츠</strong> &nbsp;On, shuukatsu</a>
+								<ul class="icons">
+								<li><a class="icon brands fa-dribbble" href="#"><span class="label">Dribbble</span></a></li>
+								<li><a th:text=${member.nick} href="#"></a></li>
+								<li><a th:href="@{/logout}" class="button primary small">log out</a></li>
+								<li><a class="icon brands fa-twitter" href="#"><span class="label">Twitter</span></a></li>
+								<li><a class="icon brands fa-facebook-f" href="#"><span class="label">Facebook</span></a></li>
+								<li><a class="icon brands fa-snapchat-ghost" href="#"><span class="label">Snapchat</span></a></li>
+								<li><a class="icon brands fa-instagram" href="#"><span class="label">Instagram</span></a></li>
+								<li><a class="icon brands fa-medium-m" href="#"><span class="label">Medium</span></a></li>
+							</ul>
+							</header>
 
 						<!-- Banner -->
 							<section id="banner">
