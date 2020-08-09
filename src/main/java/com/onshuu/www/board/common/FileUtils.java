@@ -1,18 +1,17 @@
 package com.onshuu.www.board.common;
 
+import com.onshuu.www.board.dto.BoardFileDto;
+import org.springframework.stereotype.Component;
+import org.springframework.util.ObjectUtils;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
+
 import java.io.File;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-
-import org.springframework.stereotype.Component;
-import org.springframework.util.ObjectUtils;
-import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.multipart.MultipartHttpServletRequest;
-
-import com.onshuu.www.board.dto.BoardFileDto;
 
 @Component
 public class FileUtils {
@@ -54,12 +53,12 @@ public class FileUtils {
                         else if(contentType.contains("image/gif")) {
                             originalFileExtension = ".gif";
                         }
-                        else{
-                            break;
-                        }
+                       // else{
+                         //   break;
+                        //}
                     }
 
-                    newFileName = Long.toString(System.nanoTime()) + originalFileExtension;
+                    newFileName = Long.toString(System.nanoTime()) /*+ originalFileExtension*/;
                     BoardFileDto boardFile = new BoardFileDto();
                     boardFile.setBoardIdx(boardIdx);
                     boardFile.setFileSize(multipartFile.getSize());
