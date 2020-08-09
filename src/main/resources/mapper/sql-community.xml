@@ -2,13 +2,12 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.onshuu.www.community.mapper.CommuMapper">
-    <update id="updateCommuQnaHitCount"></update>
-    <select id="selectCommuQnaList" resultType="com.onshuu.www.community.dto.CommuDto">
+	<select id="selectCommuList"
+			resultType="com.onshuu.www.community.dto.CommuDto">
 		<![CDATA[
 			SELECT
 				qna_num,
 				qna_title,
-				qna_nick,
 				qna_hitCnt,
 				DATE_FORMAT(qna_created_datetime, '%Y.%m.%d %H:%i:%s') AS qna_created_datetime
 			FROM
@@ -18,9 +17,10 @@
 			ORDER BY qna_num DESC
 		]]>
 	</select>
-    <select id="selectCommuQnaDetail" resultType="com.onshuu.www.community.dto.CommuDto"></select>
 
-    <insert id="insertCommuQna" parameterType="com.onshuu.www.community.dto.CommuDto" useGeneratedKeys="true" keyProperty="qna_num">
+	<insert id="insertCommu"
+			parameterType="com.onshuu.www.community.dto.CommuDto" useGeneratedKeys="true"
+			keyProperty="qna_num">
 		<![CDATA[
 			INSERT INTO shucommu_qna
 			(
@@ -31,64 +31,65 @@
 			)
 			VALUES
 			(
-				#{title},
-				#{contents},
+				#{qna_title},
+				#{qna_input},
 				NOW(),
-				#{nickname}
+				'admin'
 			)
 		]]>
 	</insert>
 
-    <!--	<select id="selectCommuQnaDetail" parameterType="int" resultType="com.onshuu.www.community.dto.CommuDto">-->
-    <!--		<![CDATA[-->
-    <!--			SELECT-->
-    <!--				qna_num,-->
-    <!--				qna_creator_nick,-->
-    <!--				qna_title,-->
-    <!--				qna_input,-->
-    <!--				qna_hitCnt,-->
-    <!--				DATE_FORMAT(qna_created_datetime, '%Y.%m.%d %H:%i:%s') AS qna_created_datetime-->
+	<select id="selectCommuDetail" parameterType="int"
+			resultType="com.onshuu.www.community.dto.CommuDto">
+		<![CDATA[
+			SELECT
+				qna_num,
+				qna_title,
+				qna_input,
+				qna_hitCnt,
+				DATE_FORMAT(qna_created_datetime, '%Y.%m.%d %H:%i:%s') AS qna_created_datetime,
+				qna_nick
+			FROM
+				shucommu_qna
+			WHERE
+				qna_num = #{qna_num}
+				AND qna_deleted_yn = 'N'
+		]]>
+	</select>
 
-    <!--			FROM-->
-    <!--				shucommu_qna-->
-    <!--			WHERE-->
-    <!--				qna_num = #{qna_num}-->
-    <!--				AND qna_deleted_yn = 'N'-->
-    <!--		]]>-->
-    <!--	</select>-->
-    <!--	<select id="selectCommuQnaList" resultType="com.onshuu.www.community.dto.CommuDto"></select>-->
+	<update id="updateHitCount" parameterType="int">
+		<![CDATA[
+			UPDATE
+				shucommu_qna
+			SET
+				qna_hitCnt = qna_hitCnt + 1
+			WHERE
+				qna_num = #{qna_num}
+		]]>
+	</update>
 
-    <!--	<update id="updateCommuQnaHitCount" parameterType="int">-->
-    <!--		<![CDATA[-->
-    <!--			UPDATE-->
-    <!--				shucommu_qna-->
-    <!--			SET-->
-    <!--				qna_hitCnt = qna_hitCnt + 1-->
-    <!--			WHERE-->
-    <!--				qna_num = #{qna_num}-->
-    <!--		]]>-->
-    <!--	</update>-->
+	<update id="updateCommu"
+			parameterType="com.onshuu.www.community.dto.CommuDto">
+		<![CDATA[
+			UPDATE shucommu_qna SET
+				qna_title = #{qna_title},
+				qna_input = #{qna_input},
+				qna_updated_datetime = Now(),
+				qna_updater_nick = 'admin'
+			WHERE
+				qna_num = #{qna_num}
+		]]>
+	</update>
 
-    <!--    <update id="updateCommuQna" parameterType="com.onshuu.www.community.dto.CommuDto">-->
-    <!--		<![CDATA[-->
-    <!--			UPDATE shucommu_qna SET-->
-    <!--				qna_title = #{title},-->
-    <!--				qna_input = #{contents},-->
-    <!--				qna_updated_datetime = Now(),-->
-    <!--				qna_updater_nick = 'admin'-->
-    <!--			WHERE-->
-    <!--				qna_num = #{qna_num}-->
-    <!--		]]>-->
-    <!--	</update>-->
+	<update id="deleteCommu" parameterType="int">
+		<![CDATA[
+			UPDATE shucommu_qna SET
+				qna_deleted_yn = 'Y',
+				qna_updated_datetime = Now(),
+				qna_updater_id = 'admin'
+			WHERE
+				qna_num = #{qna_num}
+		]]>
+	</update>
 
-    <!--    <update id="deleteCommuQna" parameterType="int">-->
-    <!--		<![CDATA[-->
-    <!--			UPDATE shucommu_qna SET-->
-    <!--				qna_deleted_yn = 'Y',-->
-    <!--				qna_updated_datetime = Now(),-->
-    <!--				qna_updater_nick = #{nickname}-->
-    <!--			WHERE-->
-    <!--				qna_num = #{qna_num}-->
-    <!--		]]>-->
-    <!--	</update>-->
 </mapper>
