@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<title>login</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+	<link rel="stylesheet" th:href="@{/assets/css/main.css}"/>
+</head>
+<body class="is-preload">
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Main -->
+					<div id="main">
+						<div class="inner">
+
+							<!-- Header -->
+								<div th:replace="/header::header"></div>
+
+							<!-- Content -->
+								<section>
+									<header class="main">
+										<h1>Sign in</h1>
+									</header>
+									
+									<div>
+									</div>
+									
+									<hr class="major">
+									
+									<!-- Form -->
+										<h3>Form</h3>
+
+										<form th:action="login" method="post">
+					<table th:align="center" border="1" th:cellpadding="0" th:cellspacing="0">				
+						<tr>
+							<td th:text="Id"></td>
+							<td><input name="Id" type="text" size="10"></td>
+						</tr>
+						<tr>
+							<td th:text="Password"></td>
+							<td><input name="Password" type="password" size="10"></td>
+						</tr>
+						<tr>
+							<td colspan="2" align="center">
+								<input type="submit" value="sign in" class="primary button">
+								<input type="reset" value="reset">
+							</td>
+						</tr>
+					</table>
+					</form>	
+																						
+									<hr class="major">
+									
+								</section>
+
+						</div>
+					</div>
+
+				<!-- Sidebar -->
+				<div th:include="/sidebar"></div>
+
+			</div>
+
+		<!-- Scripts -->
+			<script src="/assets/js/jquery.min.js"></script>
+			<script src="/assets/js/browser.min.js"></script>
+			<script src="/assets/js/breakpoints.min.js"></script>
+			<script src="/assets/js/util.js"></script>
+			<script src="/assets/js/main.js"></script>
+</body>
+</html>

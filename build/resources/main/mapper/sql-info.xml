@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.onshuu.www.info.mapper.InfoMapper">
+<!-- 매퍼와 xml의 쿼리를 매칭하려면 매퍼 인터페이스의 경로와 메소드 이름, 쿼리의 이름이 같아야 한다.
+즉, BoardMapper 인터페이스에 있는 selectBoardList에서 selectBoardList라는 이름의 쿼리와 매핑하기 위해서는
+그 전체 경로인 board.board.mapper.BoardMapper.selectBoardList가 필요하다는 것.
+쿼리의 아이디를 지정할 때 각각의 쿼리에 전체 경로를 일일이 명시하는 것은 중복된 작업
+네임스페이스에서 공통적으로 사용되는 경로를 지정해 네임스페이스와 쿼리 아이디가 합쳐져 호출되게끔 한다. -->
+	<select id="selectNewsList" resultType="com.onshuu.www.info.dto.InfoDto">
+	<!-- select 쿼리: select태그 사용
+	resultType을 명시할 때는 해당 클래스의 패키지를 포함에 지정한다. -->
+		<![CDATA[
+			SELECT
+				news_num,
+				news_title,
+				news_input,
+				DATE_FORMAT(news_date, '%Y.%m.%d %H:%i:%s') AS news_date,
+				news_view
+			FROM
+				shuInfo_news
+			WHERE
+				deleted_yn = 'N'
+			ORDER BY news_num DESC
+		]]>
+	</select>
+	
+	<insert id="insertNews" parameterType="com.onshuu.www.info.dto.InfoDto" useGeneratedKeys="true" keyProperty="newsNum">
+		<![CDATA[
+			INSERT INTO shuInfo_news
+			(
+				news_title, 
+				news_input, 
+				news_date, 
+				creator_id
+			) 
+			VALUES 
+			(
+				#{newsTitle}, 
+				#{newsInput}, 
+				NOW(), 
+				'admin'			
+			)
+		]]>
+	</insert>
+	
+	<select id="selectNewsDetail" parameterType="int" resultType="com.onshuu.www.info.dto.InfoDto">
+		<![CDATA[
+			SELECT
+				news_num,
+				news_title,
+				news_input,
+				news_view,
+				DATE_FORMAT(news_date, '%Y.%m.%d %H:%i:%s') AS news_date,
+				creator_id
+			FROM
+				shuInfo_news
+			WHERE
+				news_num = #{newsNum}
+				AND deleted_yn = 'N'
+		]]>
+	</select>
+	
+	<update id="updateHitCount" parameterType="int">
+		<![CDATA[
+			UPDATE 
+				shuInfo_news 
+			SET 
+				news_view = news_view + 1 
+			WHERE 
+				news_num = #{newsNum}
+		]]>
+	</update>
+	
+	<update id="updateNews" parameterType="com.onshuu.www.info.dto.InfoDto">
+		<![CDATA[
+			UPDATE shuInfo_news SET 
+				news_title = #{newsTitle},
+				news_input = #{newsInput},
+				news_date = Now(),
+				creator_id = 'admin'
+			WHERE 
+				news_num = #{newsNum}
+		]]>
+	</update>
+	
+	<update id="deleteNews" parameterType="int">
+		<![CDATA[
+			UPDATE shuInfo_news SET 
+				deleted_yn = 'Y',
+				news_date = Now(),
+				creator_id = 'admin'
+			WHERE 
+				news_num = #{newsNum}
+		]]>
+	</update>
+	
+	
+	
+	<select id="selectRecList" resultType="com.onshuu.www.info.dto.InfoDto">
+	<!-- select 쿼리: select태그 사용
+	resultType을 명시할 때는 해당 클래스의 패키지를 포함에 지정한다. -->
+		<![CDATA[
+			SELECT
+				rec_num, 
+				rec_company, 
+				rec_posit,  
+				rec_qual, 
+				rec_deadline 
+			FROM
+				shuInfo_recruit
+			WHERE
+				deleted_yn = 'N'
+			ORDER BY rec_num DESC
+		]]>
+	</select>
+	
+	<insert id="insertRec" parameterType="com.onshuu.www.info.dto.InfoDto" useGeneratedKeys="true" keyProperty="recNum">
+		<![CDATA[
+			INSERT INTO shuInfo_recruit
+			(
+				rec_company, 
+				rec_deadline, 
+				rec_qual, 
+				rec_sal, 
+				rec_posit, 
+				rec_input, 
+				creator_id 
+			) 
+			VALUES 
+			(
+				#{recCompany}, 
+				#{recDeadline}, 
+				#{recQual}, 
+				#{recSal}, 
+				#{recPosit}, 
+				#{recInput}, 
+				'admin'			
+			)
+		]]>
+	</insert>
+	
+	<select id="selectRecDetail" parameterType="int" resultType="com.onshuu.www.info.dto.InfoDto">
+		<![CDATA[
+			SELECT
+				rec_num, 
+				rec_company, 
+				rec_deadline, 
+				rec_qual, 
+				rec_sal, 
+				rec_posit, 
+				rec_input, 
+				rec_view, 
+				creator_id
+			FROM
+				shuInfo_recruit
+			WHERE
+				rec_num = #{recNum}
+				AND deleted_yn = 'N'
+		]]>
+	</select>
+	
+	<update id="updateHitRec" parameterType="int">
+		<![CDATA[
+			UPDATE 
+				shuInfo_recruit 
+			SET 
+				rec_view = rec_view + 1 
+			WHERE 
+				rec_num = #{recNum}
+		]]>
+	</update>
+	
+	<update id="updateRec" parameterType="com.onshuu.www.info.dto.InfoDto">
+		<![CDATA[
+			UPDATE shuInfo_recruit SET 
+				rec_company = #{recCompany}, 
+				rec_deadline = #{recDeadline}, 
+				rec_qual = #{recQual}, 
+				rec_sal = #{recSal}, 
+				rec_posit = #{recPosit}, 
+				rec_input = #{recInput}, 
+				creator_id = 'admin'
+			WHERE 
+				rec_num = #{recNum}
+		]]>
+	</update>
+	
+	<update id="deleteRec" parameterType="int">
+		<![CDATA[
+			UPDATE shuInfo_recruit SET 
+				deleted_yn = 'Y',
+				creator_id = 'admin'
+			WHERE 
+				rec_num = #{recNum}
+		]]>
+	</update>
+	
+</mapper>

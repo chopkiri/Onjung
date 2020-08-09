@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>recruitWrite</title>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1, user-scalable=no">
+    <link rel="stylesheet" th:href="@{/assets/css/main.css}" />
+</head>
+<body class="is-preload">
+<!-- Wrapper -->
+<div id="wrapper">
+
+    <!-- Main -->
+    <div id="main">
+        <div class="inner">
+            <!-- Header -->
+            <header id="header">
+                <a class="logo" href="/main"><strong>오늘, 슈카츠</strong> &nbsp;On,
+                    shuukatsu</a>
+                <ul class="icons">
+                    <li><a class="button primary small" href="#">sign up</a></li>
+                    <li><a class="button small" href="#">sign in</a></li>
+                    <li><a class="icon brands fa-twitter" href="#"><span
+                            class="label">Twitter</span></a></li>
+                    <li><a class="icon brands fa-facebook-f" href="#"><span
+                            class="label">Facebook</span></a></li>
+                    <li><a class="icon brands fa-snapchat-ghost" href="#"><span
+                            class="label">Snapchat</span></a></li>
+                    <li><a class="icon brands fa-instagram" href="#"><span
+                            class="label">Instagram</span></a></li>
+                    <li><a class="icon brands fa-medium-m" href="#"><span
+                            class="label">Medium</span></a></li>
+                </ul>
+            </header>
+
+            <!-- Content -->
+            <section>
+                <header class="main">
+                    <h1>Library</h1>
+                </header>
+                <div></div>
+                <hr class="major">
+
+                <!-- Form -->
+                <h3>Form</h3>
+                <form id="frm" name="frm" method="post"
+                      action="/board/insertBoard.do" enctype="multipart/form-data">
+                    <table class="board_detail">
+                        <tr>
+                            <td>제목</td>
+                            <td><input type="text" id="title" name="title" /></td>
+                        </tr>
+                        <tr>
+                            <td colspan="2"><textarea id="contents" name="contents"></textarea>
+                            </td>
+                        </tr>
+                    </table>
+                    <input type="file" id="files" name="files" multiple="multiple">
+                    <input type="submit" id="submit" value="저장" class="btn">
+                </form>
+                <hr class="major">
+            </section>
+        </div>
+    </div>
+
+    <!-- Sidebar -->
+    <div id="sidebar">
+        <!-- class="inactive" -->
+        <div class="inner">
+
+            <!-- Search -->
+            <section id="search" class="alt">
+                <form method="post" action="#">
+                    <input type="text" name="query" id="query" placeholder="Search">
+                </form>
+            </section>
+            <!-- Menu -->
+            <nav id="menu">
+                <header class="major">
+                    <h2>오늘, 슈카츠</h2>
+                </header>
+                <ul>
+                    <li>
+                        <span class="opener">취활정보</span>
+                        <ul>
+                            <li><a href="/info/openNewsList">뉴스 / 특집</a></li>
+                            <li><a href="/info/openRecList">채용정보</a></li>
+                            <li><a href="#">전형후기</a></li>
+                            <li><a href="#">비밀게시판</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <span class="opener">커뮤니티</span>
+                        <ul>
+                            <li><a href="/openQnaList.do">질문게시판</a></li>
+                            <li><a href="#">자유게시판</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <span class="opener">자료실</span>
+                        <ul>
+                            <li><a href="/board/openBoardList.do">서식 / 양식</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </nav>
+
+
+            <!-- Section -->
+            <section>
+                <header class="major">
+                    <h2>今日、就活。</h2>
+                </header>
+
+                <ul class="contact">
+                    <li class="icon solid fa-envelope"><a href="#">shuukatsu@onshu.com</a></li>
+
+                    <li class="icon solid fa-phone">(02) 9658-8852</li>
+
+                    <li class="icon solid fa-home">서울 종로구 종로12길 15 종로코아 8F<br>
+
+                    </li>
+                </ul>
+            </section>
+
+            <!-- Footer -->
+
+            <footer id="footer">
+
+                <p class="copyright">
+                    ©All rights reserved.</p>
+
+            </footer>
+        </div>
+
+        <a class="toggle" href="#sidebar">Toggle</a>
+    </div>
+
+</div>
+
+<!-- Scripts -->
+<script src="/assets/js/jquery.min.js"></script>
+<script src="/assets/js/browser.min.js"></script>
+<script src="/assets/js/breakpoints.min.js"></script>
+<script src="/assets/js/util.js"></script>
+<script src="/assets/js/main.js"></script>
+</body>
+</html>

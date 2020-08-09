@@ -1,11 +1,16 @@
 
 package com.onshuu.www.board.controller;
 
+import java.io.File;
+import java.net.URLEncoder;
 import java.util.List;
 
 
+import com.onshuu.www.board.dto.BoardFileDto;
+import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.ObjectUtils;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -14,6 +19,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.onshuu.www.board.dto.BoardDto;
 import com.onshuu.www.board.service.BoardService;
+
+import javax.servlet.http.HttpServletResponse;
 
 @Controller
 public class BoardController {
@@ -37,9 +44,9 @@ public class BoardController {
     }
 
     @RequestMapping("/board/insertBoard.do")
-    public String insertBoard(BoardDto board)
+    public String insertBoard(BoardDto board, MultipartHttpServletRequest multipartHttpServletRequest)
             throws Exception {
-        boardService.insertBoard(board);
+        boardService.insertBoard(board, multipartHttpServletRequest);
         return "redirect:/board/openBoardList.do";
     }
 
@@ -63,6 +70,25 @@ public class BoardController {
     public String deleteBoard(int boardIdx) throws Exception {
         boardService.deleteBoard(boardIdx);
         return "redirect:/board/openBoardList.do";
+    }
+
+    @RequestMapping("/board/downloadBoardFile.do")
+    public void downloadBoardFile(@RequestParam int idx, @RequestParam int boardIdx, HttpServletResponse response) throws Exception{
+        BoardFileDto boardFile = boardService.selectBoardFileInformation(idx, boardIdx);
+        if(ObjectUtils.isEmpty(boardFile) == false) {
+            String fileName = boardFile.getOriginalFileName();
+
+            byte[] files = FileUtils.readFileToByteArray(new File(boardFile.getStoredFilePath()));
+
+            response.setContentType("application/octet-stream");
+            response.setContentLength(files.length);
+            response.setHeader("Content-Disposition", "attachment; fileName=\"" + URLEncoder.encode(fileName,"UTF-8")+"\";");
+            response.setHeader("Content-Transfer-Encoding", "binary");
+
+            response.getOutputStream().write(files);
+            response.getOutputStream().flush();
+            response.getOutputStream().close();
+        }
     }
 
 }

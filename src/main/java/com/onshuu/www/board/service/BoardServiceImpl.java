@@ -3,31 +3,44 @@ package com.onshuu.www.board.service;
 import java.util.List;
 
 
+import com.onshuu.www.board.dto.BoardFileDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.onshuu.www.board.dto.BoardDto;
 import com.onshuu.www.board.mapper.BoardMapper;
+import com.onshuu.www.board.common.FileUtils;
 
 @Service
 public class BoardServiceImpl implements BoardService {
-
     @Autowired
     private BoardMapper boardMapper;
+
+    @Autowired
+    private FileUtils fileUtils;
 
     @Override
     public List<BoardDto> selectBoardList() throws Exception {
         return boardMapper.selectBoardList();
     }
+
     @Override
-    public void insertBoard(BoardDto board) throws Exception {
+    public void insertBoard(BoardDto board, MultipartHttpServletRequest multipartHttpServletRequest) throws Exception {
         boardMapper.insertBoard(board);
+        List<BoardFileDto> list = fileUtils.parseFileInfo(board.getBoardIdx(), multipartHttpServletRequest);
+        if(CollectionUtils.isEmpty(list) == false){
+            boardMapper.insertBoardFileList(list);
+        }
     }
 
     @Override
-    public BoardDto selectBoardDetail(int boardIdx) throws Exception {
+    public BoardDto selectBoardDetail(int boardIdx) throws Exception{
         BoardDto board = boardMapper.selectBoardDetail(boardIdx);
+        List<BoardFileDto> fileList = boardMapper.selectBoardFileList(boardIdx);
+        board.setFileList(fileList);
+
         boardMapper.updateHitCount(boardIdx);
 
         return board;
@@ -43,5 +56,9 @@ public class BoardServiceImpl implements BoardService {
         boardMapper.deleteBoard(boardIdx);
     }
 
+    @Override
+    public BoardFileDto selectBoardFileInformation(int idx, int boardIdx) throws Exception {
+        return boardMapper.selectBoardFileInformation(idx, boardIdx);
+    }
 
 }

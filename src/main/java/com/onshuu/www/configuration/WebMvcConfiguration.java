@@ -9,6 +9,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import com.onshuu.www.interceptor.LoggerInterceptor;
 
 
+
 @Configuration
 public class WebMvcConfiguration implements WebMvcConfigurer{
 	
