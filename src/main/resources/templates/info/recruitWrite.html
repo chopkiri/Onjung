@@ -5,6 +5,42 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
 	<link rel="stylesheet" th:href="@{/assets/css/main.css}"/>
+	<script type="text/javascript">
+	
+	function func() {
+	if(recCompany.value=='') {
+        alert('제목을 입력해주세요.');
+        recCompany.focus();
+        return false;
+	}
+	
+	if(recDeadline.value=='') {
+        alert('마감일을 입력해주세요.');
+        recDeadline.focus();
+        return false;
+	}
+	
+	if(recQual.value=='') {
+        alert('지원자격을 입력해주세요.');
+        recQual.focus();
+        return false;
+	}
+	
+	if(recSal.value=='') {
+        alert('급여를 입력해주세요.');
+        recSal.focus();
+        return false;
+	}
+        
+	if(recInput.value=='') {
+        alert('내용을 입력해주세요.');
+        recInput.focus();
+        return false;
+	}
+	return true;
+}
+	
+	</script>
 </head>
 <body class="is-preload">
 		<!-- Wrapper -->
@@ -31,23 +67,23 @@
 									<!-- Form -->
 													<h3>Form</h3>
 
-													<form action="/info/insertRec" method="post">
+													<form action="/info/insertRec" method="post" onSubmit="return func()">
 														<div class="row gtr-uniform">
 															<div class="col-6 col-12-xsmall">
-																<input name="recCompany" id="demo-name" type="text" placeholder="Company" value="">
+																<input name="recCompany" id="recCompany" type="text" placeholder="Company" value="">
 															</div>
 															<div class="col-6 col-12-xsmall">
-																<input name="recDeadline" id="demo-email" type="text" placeholder="Deadline" value="">
+																<input name="recDeadline" id="recDeadline" type="text" placeholder="Deadline" value="">
 															</div>
 															<div class="col-6 col-12-xsmall">
-																<input name="recQual" id="demo-name" type="text" placeholder="Qualifications" value="">
+																<input name="recQual" id="recQual" type="text" placeholder="Qualifications" value="">
 															</div>
 															<div class="col-6 col-12-xsmall">
-																<input name="recSal" id="demo-email" type="text" placeholder="Salary" value="">
+																<input name="recSal" id="recSal" type="text" placeholder="Salary" value="">
 															</div>
 															<!-- Break -->
 															<div class="col-12">
-																<select name="recPosit" id="demo-category">
+																<select name="recPosit" id="recPosit">
 																	<option value="">- Position -</option>
 																	<option value="종합직">종합직</option>
 																	<option value="엔지니어">엔지니어</option>
@@ -65,7 +101,7 @@
 															</div>
 												<!-- Break -->
 												<div class="col-12">
-													<textarea name="recInput" id="demo-message" placeholder="Contents" rows="6"></textarea>
+													<textarea name="recInput" id="recInput" placeholder="Contents" rows="6"></textarea>
 												</div>
 												<!-- Break -->
 												<div class="col-12">

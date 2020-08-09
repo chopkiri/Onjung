@@ -5,6 +5,7 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
 	<link rel="stylesheet" th:href="@{/assets/css/main.css}"/>
+	
 </head>
 <body class="is-preload">
 		<!-- Wrapper -->
@@ -55,7 +56,7 @@
 												<!-- Break -->
 												<div class="row gtr-uniform">
 															<div class="col-6 col-12-xsmall">
-																<input th:value="${board.newsTitle }" name="newsTitle" id="demo-name" type="text" value="">
+																<input th:value="${board.newsTitle }" name="newsTitle" id="newsTitle" type="text" value="">
 															</div>
 															<!-- Break -->
 															<div class="col-12">
@@ -65,7 +66,7 @@
 															
 															<!-- Break -->
 															<div class="col-12">
-																<textarea th:text="${board.newsInput }" name="newsInput" id="demo-message" rows="6"></textarea>
+																<textarea th:text="${board.newsInput }" name="newsInput" id="newsInput" rows="6"></textarea>
 															</div>
 															<!-- Break -->
 															<div class="col-12">

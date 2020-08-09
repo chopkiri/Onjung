@@ -5,6 +5,24 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
 	<link rel="stylesheet" th:href="@{/assets/css/main.css}"/>
+	<script type="text/javascript">
+	
+	function func() {
+	if(newsTitle.value=='') {
+        alert('제목을 입력해주세요.');
+        newsTitle.focus();
+        return false;
+	}
+        
+	if(newsInput.value=='') {
+        alert('내용을 입력해주세요.');
+        newsInput.focus();
+        return false;
+	}
+	 return true;
+}
+	
+	</script>
 </head>
 <body class="is-preload">
 		<!-- Wrapper -->
@@ -31,10 +49,10 @@
 									<!-- Form -->
 										<h3>Form</h3>
 
-										<form method="post" action="/info/insertNews">
+										<form method="post" action="/info/insertNews" onSubmit="return func()">
 											<div class="row gtr-uniform">
 												<div class="col-6 col-12-xsmall">
-													<input type="text" name="newsTitle" id="demo-name" value="" placeholder="Title">
+													<input type="text" name="newsTitle" id="newsTitle" value="" placeholder="Title">
 												</div>
 												<!-- Break -->
 												<div class="col-12">
@@ -49,7 +67,7 @@
 												
 												<!-- Break -->
 												<div class="col-12">
-													<textarea name="newsInput" id="demo-message" placeholder="Contents" rows="6"></textarea>
+													<textarea name="newsInput" id="newsInput" placeholder="Contents" rows="6"></textarea>
 												</div>
 												<!-- Break -->
 												<div class="col-12">

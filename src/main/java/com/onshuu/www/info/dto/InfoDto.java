@@ -6,6 +6,7 @@ import lombok.Data;
 public class InfoDto {
 	
 	private int newsNum;
+	
 	private String newsTitle;
 	private String newsInput;
 	private String newsDate;
