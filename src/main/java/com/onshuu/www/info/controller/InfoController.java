@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.onshuu.www.info.dto.InfoDto;
@@ -54,8 +55,9 @@ public class InfoController {
 			
 	@RequestMapping("/info/insertNews")
 	//폼에서 action 속성에 insertBoard.do를 지정
-	public String insertNews(InfoDto board) throws Exception{
-		infoService.insertNews(board);
+	public String insertNews(InfoDto board, MultipartHttpServletRequest 
+			multipartHttpServletRequest) throws Exception{
+		infoService.insertNews(board, multipartHttpServletRequest);
 		//service영역의 insert 메소드 호출
 		return "redirect:/info/openNewsList";
 		//뷰 호출x, 리다이렉트 해서 목록 화면으로 돌아간다.

@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.onshuu.www.info.dto.InfoDto;
 import com.onshuu.www.info.service.InfoService;
@@ -25,8 +26,9 @@ public class RestInfoApiController {
 	}
 	
 	@RequestMapping(value="/api/news/write", method=RequestMethod.POST)
-	public void insertNews(@RequestBody InfoDto board) throws Exception{
-		infoService.insertNews(board);
+	public void insertNews(@RequestBody InfoDto board, MultipartHttpServletRequest 
+			multipartHttpServletRequest) throws Exception{
+		infoService.insertNews(board, multipartHttpServletRequest);
 	}
 	
 	@RequestMapping(value="/api/news/{newsNum}", method=RequestMethod.GET)

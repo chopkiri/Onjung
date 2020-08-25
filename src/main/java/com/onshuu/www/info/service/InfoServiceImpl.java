@@ -1,20 +1,34 @@
 package com.onshuu.www.info.service;
 
-import java.util.List;
+import java.util.Iterator;
 
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
+import org.springframework.util.ObjectUtils;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import com.onshuu.www.board.common.FileUtils;
+import com.onshuu.www.board.dto.BoardFileDto;
 import com.onshuu.www.info.dto.InfoDto;
+import com.onshuu.www.info.dto.InfoFileDto;
 import com.onshuu.www.info.mapper.InfoMapper;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 @Service
 //비즈니스 로직을 처리하는 서비스 클래스를 나타내는 어노테이션
 public class InfoServiceImpl implements InfoService {
 	//비즈니스 로직
-	
+		
 	@Autowired
 	private InfoMapper infoMapper;
+	
+	@Autowired
+	private FileUtils fileUtils;
 	
 	@Override
 	public List<InfoDto> selectNewsList() throws Exception {
@@ -25,9 +39,34 @@ public class InfoServiceImpl implements InfoService {
 		//일반적으로는 결과 조회 및 데이터 가공을 위해 보다 복잡한 로직을 처리하게 된다.
 	}
 
+	
 	@Override
-	public void insertNews(InfoDto board) throws Exception {
+	public void insertNews(InfoDto board, MultipartHttpServletRequest 
+			multipartHttpServletRequest) throws Exception {
 		infoMapper.insertNews(board);
+		/*if(ObjectUtils.isEmpty(multipartHttpServletRequest) == false) {
+			Iterator<String> iterator = multipartHttpServletRequest.getFileNames();
+			String name;
+			while(iterator.hasNext()) {
+				name = iterator.next();
+				log.debug("file tag name : " + name);
+				List<MultipartFile> list = multipartHttpServletRequest.getFiles(name);
+				for(MultipartFile multipartFile : list) {
+					log.debug("start file information");
+					log.debug("file name : " + multipartFile.getOriginalFilename());
+					log.debug("file size : " + multipartFile.getSize());
+					log.debug("file content type : " + multipartFile.getContentType());
+					log.debug("end file information.\n");
+				}
+			}
+		}*/
+		
+		List<InfoFileDto> list = fileUtils.parseFileInfoNews(board.getNewsNum(), 
+				multipartHttpServletRequest);
+		
+		if(CollectionUtils.isEmpty(list) == false) {
+			infoMapper.insertNewsFileList(list);
+		}
 	}
 	
 	@Override

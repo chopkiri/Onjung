@@ -45,6 +45,31 @@
 		]]>
 	</insert>
 	
+	<insert id="insertNewsFileList" parameterType="com.onshuu.www.info.dto.InfoFileDto">
+		<![CDATA[
+			INSERT INTO shuInfo_news_file
+			(
+				board_idx,
+				original_file_name,
+				stored_file_path,
+				file_size,
+				creator_id,
+				created_datetime
+			)
+			VALUES
+		]]>
+		<foreach collection="list" item="item" separator=",">
+			(
+				#{item.boardIdx},
+				#{item.originalFileName},
+				#{item.storedFilePath},
+				#{item.fileSize},
+				'admin',
+				NOW()
+			)
+		</foreach>
+	</insert>
+	
 	<select id="selectNewsDetail" parameterType="int" resultType="com.onshuu.www.info.dto.InfoDto">
 		<![CDATA[
 			SELECT

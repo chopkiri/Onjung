@@ -2,13 +2,17 @@ package com.onshuu.www.info.service;
 
 import java.util.List;
 
+import org.springframework.web.multipart.MultipartHttpServletRequest;
+
 import com.onshuu.www.info.dto.InfoDto;
 
 public interface InfoService {
 	
+	
 	List<InfoDto> selectNewsList() throws Exception;
 	
-	void insertNews(InfoDto board) throws Exception;
+	void insertNews(InfoDto board, MultipartHttpServletRequest 
+			multipartHttpServletRequest) throws Exception;
 	
 	InfoDto selectNewsDetail(int newsNum) throws Exception;
 	

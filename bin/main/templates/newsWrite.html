@@ -31,7 +31,7 @@
 									<!-- Form -->
 										<h3>Form</h3>
 
-										<form method="post" action="/info/insertNews">
+										<form method="post" action="/info/insertNews" enctype="multipart/form-data">
 											<div class="row gtr-uniform">
 												<div class="col-6 col-12-xsmall">
 													<input type="text" name="newsTitle" id="demo-name" value="" placeholder="Title">
@@ -54,6 +54,8 @@
 												<!-- Break -->
 												<div class="col-12">
 													<ul class="actions">
+														<li><input type="file" value="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;img&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" name="files" id="files"
+														multiple="multiple"></li>
 														<li><input type="submit" value="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Save&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" class="primary"></li>
 														<li><input type="reset" value="Reset"></li>
 													</ul>
