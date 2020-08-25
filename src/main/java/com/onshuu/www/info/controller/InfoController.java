@@ -11,6 +11,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.onshuu.www.info.dto.InfoDto;
+import com.onshuu.www.info.dto.InfoFileDto;
 import com.onshuu.www.info.service.InfoService;
 
 @Controller
@@ -72,9 +73,11 @@ public class InfoController {
 		//보드 디테일로 결과를 전송할거다
 		
 		InfoDto board = infoService.selectNewsDetail(newsNum);
+		List<String> imageFile = infoService.selectInfoFileInformation(newsNum);
 		//글번호 파라미터로 받는 서비스 메소드 실행해서 결과를 DTO에 담을거다
 		mv.addObject("board", board);
 		//결과를 모델엔뷰에 담는다
+		mv.addObject("imageFile", imageFile);
 		
 		return mv;
 		//그 모델앤뷰를 반환해서 아까 저 주소로 보낸다.

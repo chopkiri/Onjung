@@ -5,8 +5,8 @@ import lombok.Data;
 @Data
 public class InfoFileDto {
 	
-	private int idx;
-	private int boardIdx;
+	private int num;
+	private int newsNum;
 	private String originalFileName;
 	private String storedFilePath;
 	private long fileSize;

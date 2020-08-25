@@ -2,8 +2,6 @@ package com.onshuu.www.info.mapper;
 
 import java.util.List;
 
-
-
 import org.apache.ibatis.annotations.Mapper;
 
 import com.onshuu.www.info.dto.InfoDto;
@@ -27,6 +25,8 @@ public interface InfoMapper {
 	void updateNews(InfoDto board) throws Exception;
 	
 	void deleteNews(int newsNum) throws Exception;
+	
+	List<String> selectInfoFileInformation(int newsNum);
 	
 	
 	

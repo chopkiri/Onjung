@@ -49,7 +49,7 @@
 		<![CDATA[
 			INSERT INTO shuInfo_news_file
 			(
-				board_idx,
+				news_num,
 				original_file_name,
 				stored_file_path,
 				file_size,
@@ -60,7 +60,7 @@
 		]]>
 		<foreach collection="list" item="item" separator=",">
 			(
-				#{item.boardIdx},
+				#{item.newsNum},
 				#{item.originalFileName},
 				#{item.storedFilePath},
 				#{item.fileSize},
@@ -81,6 +81,18 @@
 				creator_id
 			FROM
 				shuInfo_news
+			WHERE
+				news_num = #{newsNum}
+				AND deleted_yn = 'N'
+		]]>
+	</select>
+	
+	<select id="selectInfoFileInformation" parameterType="int" resultType="String">
+		<![CDATA[
+			SELECT
+				stored_file_path
+			FROM
+				shuInfo_news_file
 			WHERE
 				news_num = #{newsNum}
 				AND deleted_yn = 'N'

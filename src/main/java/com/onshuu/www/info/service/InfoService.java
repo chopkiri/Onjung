@@ -4,7 +4,9 @@ import java.util.List;
 
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import com.onshuu.www.board.dto.BoardFileDto;
 import com.onshuu.www.info.dto.InfoDto;
+import com.onshuu.www.info.dto.InfoFileDto;
 
 public interface InfoService {
 	
@@ -15,6 +17,8 @@ public interface InfoService {
 			multipartHttpServletRequest) throws Exception;
 	
 	InfoDto selectNewsDetail(int newsNum) throws Exception;
+	
+	List<String> selectInfoFileInformation(int newsNum) throws Exception;
 	
 	void updateNews(InfoDto board) throws Exception;
 	

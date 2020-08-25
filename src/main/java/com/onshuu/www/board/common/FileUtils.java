@@ -80,7 +80,7 @@ public class FileUtils {
     
     
     
-    public List<InfoFileDto> parseFileInfoNews(int boardIdx, MultipartHttpServletRequest multipartHttpServletRequest) throws Exception{
+    public List<InfoFileDto> parseFileInfoNews(int newsNum, MultipartHttpServletRequest multipartHttpServletRequest) throws Exception{
         if(ObjectUtils.isEmpty(multipartHttpServletRequest)){
             return null;
         }
@@ -89,7 +89,8 @@ public class FileUtils {
 
         DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyyMMdd");
         ZonedDateTime current = ZonedDateTime.now();
-        String path = "images/"+current.format(format);
+        String path = "src/main/resources/static/images/"+current.format(format);
+        String tPath = "/images/" + current.format(format);
         File file = new File(path);
         if(file.exists() == false){
             file.mkdirs();
@@ -117,17 +118,17 @@ public class FileUtils {
                         else if(contentType.contains("image/gif")) {
                             originalFileExtension = ".gif";
                         }
-                       // else{
-                         //   break;
-                        //}
+                        else{
+                            break;
+                        }
                     }
 
-                    newFileName = Long.toString(System.nanoTime()) /*+ originalFileExtension*/;
+                    newFileName = Long.toString(System.nanoTime()) + originalFileExtension;
                     InfoFileDto infoFile = new InfoFileDto();
-                    infoFile.setBoardIdx(boardIdx);
+                    infoFile.setNewsNum(newsNum);
                     infoFile.setFileSize(multipartFile.getSize());
                     infoFile.setOriginalFileName(multipartFile.getOriginalFilename());
-                    infoFile.setStoredFilePath(path + "/" + newFileName);
+                    infoFile.setStoredFilePath(tPath + "/" + newFileName);
                     fileList.add(infoFile);
 
                     file = new File(path + "/" + newFileName);

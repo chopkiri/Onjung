@@ -1,17 +1,13 @@
 package com.onshuu.www.info.service;
 
-import java.util.Iterator;
 
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
-import org.springframework.util.ObjectUtils;
-import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.onshuu.www.board.common.FileUtils;
-import com.onshuu.www.board.dto.BoardFileDto;
 import com.onshuu.www.info.dto.InfoDto;
 import com.onshuu.www.info.dto.InfoFileDto;
 import com.onshuu.www.info.mapper.InfoMapper;
@@ -77,8 +73,11 @@ public class InfoServiceImpl implements InfoService {
 		
 		return board;
 	}
-
-
+	
+	@Override
+    public List<String> selectInfoFileInformation(int newsNum) throws Exception {
+        return infoMapper.selectInfoFileInformation(newsNum);
+    }
 
 	@Override
 	public void updateNews(InfoDto board) throws Exception {
